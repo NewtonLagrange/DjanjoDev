@@ -9,10 +9,14 @@ class Book(models.Model):
     content = models.CharField(max_length=1000)
     pub_date = models.DateTimeField()
 
+    def __str__(self):
+        return self.name
+
 
 class Hero(models.Model):
     name = models.CharField(max_length=50)
     gender = models.BooleanField()
-    book_id = models.ForeignKey('Book', on_delete='CASCADE')
+    book_id = models.ForeignKey('Book', on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.name
