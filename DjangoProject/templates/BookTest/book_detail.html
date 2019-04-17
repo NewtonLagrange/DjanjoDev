@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+</head>
+<body>
+<ul>
+    {% if book %}
+    <li>{{book.name}}</li>
+    <li>{{book.hero_name}}</li>
+    <li>{{book.content}}</li>
+    <li>{{book.pub_date}}</li>
+    {% else %}
+    <p>没有这本书</p>
+    {% endif %}
+</ul>
+<br>
+<a href="/index/book/">返回书籍</a>
+
+</body>
+</html>

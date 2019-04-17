@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍</title>
+</head>
+<body>
+    <h2>书籍名称</h2>
+    <ul>
+        {% if books %}
+            {% for book in books %}
+            <li><a href="/index/book/{{book.id}}">{{book.name}}</a></li>
+            {% endfor %}
+        {% else %}
+            <p>没有书籍</p>
+        {% endif %}
+    </ul>
+
+</body>
+</html>
