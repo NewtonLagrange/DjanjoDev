@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Book
 
 
@@ -21,4 +20,4 @@ def book_detail(request, num):
 
 
 def test(request):
-    return HttpResponse('首页')
+    return render(request, 'BookTest/index.html')

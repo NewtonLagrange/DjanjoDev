@@ -9,7 +9,7 @@
     <ul>
         {% if books %}
             {% for book in books %}
-            <li><a href="/index/book/{{book.id}}">{{book.name}}</a></li>
+            <li><a href="{% url 'BookTest:book_detail' book.id %}">{{book.name}}</a></li>
             {% endfor %}
         {% else %}
             <p>没有书籍</p>
