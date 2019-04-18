@@ -7,6 +7,8 @@
         <list>
           <option value="DjangoProject.BookTest.models.Book.objecets" />
           <option value="DjangoProject.BookTest.models.Book.objects" />
+          <option value="VoteProject.QC.models.Question.objects" />
+          <option value="VoteProject.QC.models.Choice.objects" />
         </list>
       </option>
     </inspection_tool>
