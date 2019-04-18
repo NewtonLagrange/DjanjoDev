@@ -2,19 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/main.css">
     <title>书籍</title>
 </head>
 <body>
+<nav id="header"> 123456 </nav>
     <h2>书籍名称</h2>
     <ul>
         {% if books %}
             {% for book in books %}
-            <li><a href="{% url 'BookTest:book_detail' book.id %}">{{book.name}}</a></li>
+            <li>
+                <a href="{% url 'BookTest:book_detail' book.id %}">{{book.name}}</a>
+                <a href="{% url 'BookTest:delete' book.id %}">删除</a>
+            </li>
             {% endfor %}
         {% else %}
-            <p>没有书籍</p>
+            没有书籍
         {% endif %}
     </ul>
 
+<a href="{% url 'BookTest:index' %}">首页</a>
+<a href="{% url 'BookTest:add_book' %}">添加书籍</a>
 </body>
 </html>
