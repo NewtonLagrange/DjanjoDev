@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+</head>
+<body>
+<form action="{% url 'QC:score' ques_id %}" method="post">
+    {% for choice in choices %}
+    {{choice.name}}<input type="radio" name="choice" value="{{choice.id}}"><br>
+    {% endfor %}
+    <input type="submit" value="提交">
+
+</form>
+</body>
+</html>

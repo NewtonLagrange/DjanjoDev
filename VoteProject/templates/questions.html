@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问题</title>
+</head>
+<body>
+<ul>
+    {% for question in questions %}
+    <li>
+        <a href="{% url 'QC:vote' question.id %}">{{question.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

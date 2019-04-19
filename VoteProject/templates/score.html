@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>票数</title>
+</head>
+<body>
+<p>{{question.name}}</p>
+<ul>
+    {% for choice in choices %}
+
+            <li>{{choice.name}}: {{choice.num}}</li>
+
+    {% endfor %}
+</ul>
+<a href="{% url 'QC:questions' %}">首页</a>
+
+</body>
+</html>
