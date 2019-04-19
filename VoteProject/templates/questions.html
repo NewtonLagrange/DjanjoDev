@@ -9,8 +9,11 @@
     {% for question in questions %}
     <li>
         <a href="{% url 'QC:vote' question.id %}">{{question.name}}</a>
+        <a href="{% url 'QC:delete_question' question.id %}">删除</a>
     </li>
     {% endfor %}
 </ul>
+<a href="{% url 'QC:add_question' %}">添加问题</a>
+
 </body>
 </html>

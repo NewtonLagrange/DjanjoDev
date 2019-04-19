@@ -5,12 +5,21 @@
     <title>投票</title>
 </head>
 <body>
-<form action="{% url 'QC:score' ques_id %}" method="post">
-    {% for choice in choices %}
-    {{choice.name}}<input type="radio" name="choice" value="{{choice.id}}"><br>
-    {% endfor %}
-    <input type="submit" value="提交">
+<h2>{{question.name}}</h2>
+<form action="{% url 'QC:score' question.id %}" method="post">
 
+    <ul>
+        {% for choice in choices %}
+        <li>
+            {{choice.name}}<input type="radio" name="choice" value="{{choice.id}}"><br>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <input type="submit" value="投票">
 </form>
+<!-- TODO 添加url 考虑ques_id-->
+<a href="{% url 'QC:add_choice' question.id %}">给该问题添加选项</a>
+
 </body>
 </html>
