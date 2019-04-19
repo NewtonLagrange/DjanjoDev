@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加书籍</title>
+</head>
+<body>
+<form action="{% url 'BookTest:add_book' %}" method="post">
+    书籍名 <input type="text" name="name">
+    英雄名 <input type="text" name="hero_name">
+    内容 <input type="text" name="content">
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>
