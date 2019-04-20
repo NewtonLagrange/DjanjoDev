@@ -37,11 +37,7 @@ def add_book(request):
         book_.hero_name = hero_name
         book_.content = content
         book_.save()
-        return HttpResponseRedirect('/book/')
+        return HttpResponseRedirect('/book/book/')
 
     else:
         return render(request, 'BookTest/add_book.html')
-
-
-def test(request):
-    return render(request, 'BookTest/index.html')

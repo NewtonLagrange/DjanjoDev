@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>问题列表</title>
+    <link href="/static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <script charset="utf-8" src="" type="text/javascript"></script>
+    <link href="" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h1">问题列表</h1>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Question Name</th>
+                    <th scope="col">Vote</th>
+                    <th scope="col">Alter</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for question in questions %}
+                    {% if question.id == ques_id %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <form action="" method="post">
+                            <td><input type="text" name="name" placeholder="{{question.name}}" required></td>
+                            <td><a class="text-info" href="{% url 'QC:vote' question.id %}">点我</a></td>
+                            <td><input type="submit" value="完成"></td>
+                            </form>
+                            <td><a class="text-info" href="{% url 'QC:delete_question' question.id %}">删除</a></td>
+                        </tr>
+
+                    {% else %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{question.name}}</td>
+                        <td><a class="text-info" href="{% url 'QC:vote' question.id %}">点我</a></td>
+                        <td><a class="text-info" href="{% url 'QC:edit_question' question.id %}">编辑</a></td>
+                        <td><a class="text-info" href="{% url 'QC:delete_question' question.id %}">删除</a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <a href="{% url 'QC:add_question' %}">
+                <button class="btn btn-secondary">增加问题</button>
+            </a>
+            <a href="/">
+                <button class="btn btn-secondary">返回主页</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

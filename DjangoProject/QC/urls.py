@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-
+from django.views.generic.base import RedirectView
 app_name = 'QC'
 
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^add_choice/(\d+)/$', views.add_choice, name='add_choice'),
     url(r'^edit_choice/(\d+)/$', views.edit_choice, name='edit_choice'),
     url(r'^delete_choice/(\d+)/$', views.delete_choice, name='delete_choice'),
+    url(r'^favicon\.ico$', RedirectView.as_view(url=r'static/img/favicon.ico')),
 ]

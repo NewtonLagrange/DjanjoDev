@@ -2,33 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="/static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
     <title>投票</title>
 </head>
 <body>
-<h2>{{question.name}}</h2>
-
-<ul>
-    <li>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <h1>{{question.name}}</h1>
         {% for choice in choices %}
         {% if choice.id == choice_id %}
-        <form action="" method="post">
+            <form action="{% url 'QC:edit_choice' question.id %}" method="post">
             <input type="text" placeholder="{{choice.name}}" name="name" required>
             <input type="submit" value="完成">
-        </form>
+             </form>
+            <br>
         {% else %}
         <form action="{% url 'QC:score' question.id %}" method="post">
-                {{choice.name}}
-                <input type="radio" name="choice" value="{{choice.id}}" checked>
+            {{choice.name}}<input type="radio" name="choice" value="{{choice.id}}" checked>
                 <a href="{% url 'QC:edit_choice' choice.id %}">编辑</a>
                 <a href="{% url 'QC:delete_choice' choice.id %}">删除</a><br>
         {% endif %}
     {% endfor %}
         <input type="submit" value="投票">
         </form>
-    </li>
-</ul>
-
-<a href="{% url 'QC:add_choice' question.id %}">给该问题添加选项</a>
-
+            <br>
+<a href="{% url 'QC:add_choice' question.id %}"><button class="btn btn-secondary">添加选项</button></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

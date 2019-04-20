@@ -4,8 +4,11 @@ from django.db import models
 # Create your models here.
 class MyManage(models.Manager):
     def create_acc(self, name):
-        account = self.create(name = name)
+        account = self.create(name=name)
         return account
+
+    class Meta:
+        app_label = "QC"
 
 
 class Question(models.Model):
@@ -14,6 +17,9 @@ class Question(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        app_label = "QC"
 
 
 class Choice(models.Model):
@@ -25,6 +31,9 @@ class Choice(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        app_label = "QC"
+
 
 class Account(models.Model):
     name = models.CharField(max_length=20)
@@ -32,6 +41,9 @@ class Account(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        app_label = "QC"
 
 
 class PhoneNumber(models.Model):
@@ -41,12 +53,18 @@ class PhoneNumber(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        app_label = "QC"
+
 
 class Host(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        app_label = "QC"
 
 
 class Application(models.Model):
@@ -56,11 +74,5 @@ class Application(models.Model):
     def __str__(self):
         return self.name
 
-
-
-
-
-
-
-
-
+    class Meta:
+        app_label = "QC"

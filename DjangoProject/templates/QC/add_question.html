@@ -11,12 +11,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12"><h1>增加书籍</h1></div>
+        <div class="col-md-12"><h1>增加问题</h1></div>
         <div class="col-md-12">
-            <form action="{% url 'BookTest:add_book' %}" method="post">
-                <input class="input-group-lg" name="name" placeholder="书籍名" type="text" required>
-                <input class="input-group-lg" name="hero_name" placeholder="英雄名" type="text" required>
-                <input class="input-group-lg" name="content" placeholder="内容" type="text" required>
+            <form action="{% url 'QC:add_question' %}" method="post">
+                <input class="input-group-lg" name="name" placeholder="问题内容" type="text" required>
                 <input class="input-group-lg" type="submit">
             </form>
             <br>
@@ -28,5 +26,3 @@
 </div>
 </body>
 </html>
-
-

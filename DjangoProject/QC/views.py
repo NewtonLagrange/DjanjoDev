@@ -7,14 +7,14 @@ from django.http.response import HttpResponseRedirect
 def questions(request):
     """ 问题界面: 展示所有问题 """
     questions_ = Question.objects.all()
-    return render(request, 'questions.html', context={'questions': questions_})
+    return render(request, 'QC/questions.html', context={'questions': questions_})
 
 
 def vote(request, ques_id):
     """ 投票界面 """
     question = Question.objects.get(pk=ques_id)
     choices = question.choice_set.all()
-    return render(request, 'vote.html', context={'question': question, 'choices': choices})
+    return render(request, 'QC/vote.html', context={'question': question, 'choices': choices})
 
 
 def score(request, ques_id):
@@ -26,7 +26,7 @@ def score(request, ques_id):
     question = Question.objects.get(pk=ques_id)
     choices = question.choice_set.all()
 
-    return render(request, 'score.html', context={'choices': choices, 'question': question})
+    return render(request, 'QC/score.html', context={'choices': choices, 'question': question})
 
 
 def add_question(request):
@@ -37,7 +37,7 @@ def add_question(request):
         return HttpResponseRedirect('/questions/')
 
     else:
-        return render(request, 'add_question.html')
+        return render(request, 'QC/add_question.html')
 
 
 def edit_question(request, ques_id):
@@ -51,10 +51,10 @@ def edit_question(request, ques_id):
     else:
         questions_ = Question.objects.all()
         ques_id = int(ques_id)
-        return render(request, 'questions.html', context={'questions': questions_, 'ques_id': ques_id})
+        return render(request, 'QC/questions.html', context={'questions': questions_, 'ques_id': ques_id})
 
 
-def delete_question(ques_id):
+def delete_question(request, ques_id):
     question = Question.objects.get(pk=ques_id)
     question.delete()
     return HttpResponseRedirect('/questions/')
@@ -70,7 +70,7 @@ def add_choice(request, ques_id):
         return HttpResponseRedirect('/questions/vote/' + str(ques_id), {'ques_id': ques_id, 'choices': choices})
 
     else:
-        return render(request, 'add_choice.html', context={'ques_id': ques_id})
+        return render(request, 'QC/add_choice.html', context={'ques_id': ques_id})
 
 
 def edit_choice(request, choice_id):
@@ -88,11 +88,13 @@ def edit_choice(request, choice_id):
         question = choice.ques
         choices = question.choice_set.all()
         choice_id = int(choice_id)
-        return render(request, 'vote.html', context={'question': question, 'choices': choices, 'choice_id': choice_id})
+        return render(request, 'QC/vote.html',
+                      context={'question': question, 'choices': choices, 'choice_id': choice_id})
 
 
-def delete_choice(choice_id):
-    choice = Choice.objects.get(choice_id)
+def delete_choice(request, choice_id):
+    print(11111111111111111111111)
+    choice = Choice.objects.get(pk=choice_id)
     ques_id = choice.ques.id
     choice.delete()
     return HttpResponseRedirect('/questions/vote/' + str(ques_id))

@@ -1,27 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/main.css">
+    <meta charset="utf-8">
     <title>书籍</title>
+    <link href="/static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <script charset="utf-8" src="" type="text/javascript"></script>
 </head>
 <body>
-<nav id="header"> 123456 </nav>
-    <h2>书籍名称</h2>
-    <ul>
-        {% if books %}
-            {% for book in books %}
-            <li>
-                <a href="{% url 'BookTest:book_detail' book.id %}">{{book.name}}</a>
-                <a href="{% url 'BookTest:delete' book.id %}">删除</a>
-            </li>
-            {% endfor %}
-        {% else %}
-            没有书籍
-        {% endif %}
-    </ul>
 
-<a href="{% url 'BookTest:index' %}">首页</a>
-<a href="{% url 'BookTest:add_book' %}">添加书籍</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h1">书籍清单</h1>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Book Hero</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                {% if books %}
+                    <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{book.name}}</td>
+                        <td>{{ book.hero_name}}</td>
+                        <td><a class="text-info" href="{% url 'BookTest:book_detail' book.id %}">More</a></td>
+                        <td><a class="text-info" href="{% url 'BookTest:delete' book.id %}">删除</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                {% endif %}
+            </table>
+            <br>
+            <a href="{% url 'BookTest:add_book' %}">
+                <button class="btn btn-secondary">增加书籍</button>
+            </a>
+            <a href="/">
+                <button class="btn btn-secondary">返回主页</button>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+
+
