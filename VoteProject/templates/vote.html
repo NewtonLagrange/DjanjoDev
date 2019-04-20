@@ -6,19 +6,28 @@
 </head>
 <body>
 <h2>{{question.name}}</h2>
-<form action="{% url 'QC:score' question.id %}" method="post">
 
-    <ul>
+<ul>
+    <li>
         {% for choice in choices %}
-        <li>
-            {{choice.name}}<input type="radio" name="choice" value="{{choice.id}}"><br>
-        </li>
-        {% endfor %}
-    </ul>
+        {% if choice.id == choice_id %}
+        <form action="" method="post">
+            <input type="text" placeholder="{{choice.name}}" name="name" required>
+            <input type="submit" value="完成">
+        </form>
+        {% else %}
+        <form action="{% url 'QC:score' question.id %}" method="post">
+                {{choice.name}}
+                <input type="radio" name="choice" value="{{choice.id}}" checked>
+                <a href="{% url 'QC:edit_choice' choice.id %}">编辑</a>
+                <a href="{% url 'QC:delete_choice' choice.id %}">删除</a><br>
+        {% endif %}
+    {% endfor %}
+        <input type="submit" value="投票">
+        </form>
+    </li>
+</ul>
 
-    <input type="submit" value="投票">
-</form>
-<!-- TODO 添加url 考虑ques_id-->
 <a href="{% url 'QC:add_choice' question.id %}">给该问题添加选项</a>
 
 </body>

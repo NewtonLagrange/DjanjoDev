@@ -40,6 +40,20 @@ def add_question(request):
         return render(request, 'add_question.html')
 
 
+def edit_question(request, ques_id):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        question = Question.objects.get(pk=ques_id)
+        question.name = name
+        question.save()
+        return HttpResponseRedirect('/questions/')
+
+    else:
+        questions_ = Question.objects.all()
+        ques_id = int(ques_id)
+        return render(request, 'questions.html', context={'questions': questions_, 'ques_id': ques_id})
+
+
 def delete_question(ques_id):
     question = Question.objects.get(pk=ques_id)
     question.delete()
@@ -57,5 +71,33 @@ def add_choice(request, ques_id):
 
     else:
         return render(request, 'add_choice.html', context={'ques_id': ques_id})
+
+
+def edit_choice(request, choice_id):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        choice = Choice.objects.get(pk=choice_id)
+        choice.name = name
+        choice.num = 0
+        ques_id = choice.ques.id
+        choice.save()
+        return HttpResponseRedirect('/questions/vote/' + str(ques_id))
+
+    else:
+        choice = Choice.objects.get(pk=choice_id)
+        question = choice.ques
+        choices = question.choice_set.all()
+        choice_id = int(choice_id)
+        return render(request, 'vote.html', context={'question': question, 'choices': choices, 'choice_id': choice_id})
+
+
+def delete_choice(choice_id):
+    choice = Choice.objects.get(choice_id)
+    ques_id = choice.ques.id
+    choice.delete()
+    return HttpResponseRedirect('/questions/vote/' + str(ques_id))
+
+
+
 
 

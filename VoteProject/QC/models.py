@@ -26,8 +26,6 @@ class Choice(models.Model):
         return self.name
 
 
-
-
 class Account(models.Model):
     name = models.CharField(max_length=20)
     manage = MyManage()
