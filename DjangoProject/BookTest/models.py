@@ -16,7 +16,16 @@ class Book(models.Model):
 class Hero(models.Model):
     name = models.CharField(max_length=50)
     gender = models.BooleanField()
-    book_id = models.ForeignKey('Book', on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class User(models.Model):
+    name = models.CharField(max_length=20)
+    pwd = models.CharField(max_length=50)
+    nickname = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Question, Choice
 from django.http.response import HttpResponseRedirect
 # Create your views here.
@@ -34,7 +34,7 @@ def add_question(request):
         name = request.POST['name']
         question = Question(name=name)
         question.save()
-        return HttpResponseRedirect('/questions/')
+        return redirect(reverse('QC:questions'))
 
     else:
         return render(request, 'QC/add_question.html')
@@ -46,7 +46,7 @@ def edit_question(request, ques_id):
         question = Question.objects.get(pk=ques_id)
         question.name = name
         question.save()
-        return HttpResponseRedirect('/questions/')
+        return HttpResponseRedirect(reverse('QC:questions'))
 
     else:
         questions_ = Question.objects.all()
@@ -57,7 +57,7 @@ def edit_question(request, ques_id):
 def delete_question(request, ques_id):
     question = Question.objects.get(pk=ques_id)
     question.delete()
-    return HttpResponseRedirect('/questions/')
+    return redirect(reverse('QC:questions'))
 
 
 def add_choice(request, ques_id):
@@ -66,8 +66,8 @@ def add_choice(request, ques_id):
         choice.name = request.POST['name']
         choice.ques = Question.objects.get(pk=ques_id)
         choice.save()
-        choices = Choice.objects.all()
-        return HttpResponseRedirect('/questions/vote/' + str(ques_id), {'ques_id': ques_id, 'choices': choices})
+        # return HttpResponseRedirect('/questions/vote/' + str(ques_id))
+        return redirect(reverse('QC:vote', args=str(ques_id)))
 
     else:
         return render(request, 'QC/add_choice.html', context={'ques_id': ques_id})
@@ -81,7 +81,7 @@ def edit_choice(request, choice_id):
         choice.num = 0
         ques_id = choice.ques.id
         choice.save()
-        return HttpResponseRedirect('/questions/vote/' + str(ques_id))
+        return redirect(reverse('QC:vote', args=str(ques_id)))
 
     else:
         choice = Choice.objects.get(pk=choice_id)
@@ -97,7 +97,8 @@ def delete_choice(request, choice_id):
     choice = Choice.objects.get(pk=choice_id)
     ques_id = choice.ques.id
     choice.delete()
-    return HttpResponseRedirect('/questions/vote/' + str(ques_id))
+    return redirect(reverse('QC:vote', args=str(ques_id)))
+
 
 
 

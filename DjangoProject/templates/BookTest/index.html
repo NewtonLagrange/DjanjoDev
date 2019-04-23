@@ -19,10 +19,17 @@
     </script>
 </head>
 <body>
+
 <!--header-->
 <div class="container" id="header">
     <div class="row">
-        <div class="col-md-4"><a href="/">时间之外</a></div>
+        {% if username %}
+        <div class="col-md-3"><a href="/">{{username}}</a></div>
+        <div class="col-md-1"><a href="{% url 'BookTest:logout' %}">退出</a></div>
+        {% else %}
+        <div class="col-md-2"><a href="{% url 'BookTest:login' %}">登录</a></div>
+        <div class="col-md-2"><a href="{% url 'BookTest:register' %}">注册</a></div>
+        {% endif %}
 
         <div class="col-md-2"><a href="/" class=" btn btn-info">Home</a></div>
 
